@@ -1,82 +1,122 @@
-# FastLink Astro
+# FastLink
 
-Free, fast, privacy-friendly URL shortener. Astro 5 + React island + Cloudflare Turnstile.
+> Free, fast, privacy-friendly URL shortener.
+> Paste a long link, get a short one. No account. No tracking pixels. No clutter.
 
-Mirrors the FastLink feature from `portfolio-frontend-v1`, but:
+🔗 **Live:** [ismaelhv.com/fastlink](https://ismaelhv.com/fastlink/)
 
-- Server-rendered for **maximum SEO** (sitemap, JSON-LD, OG, canonical, semantic HTML).
-- Single React island only on the form — landing page is zero-JS.
-- **Basic auth credentials never leave the server** (proxied through `/api/shorten`).
-- Tailwind v4 via `@tailwindcss/vite`.
-- Standalone Node adapter for deployment anywhere.
+---
 
-## Stack
+## What it does
 
-- Astro 5 (SSR via `@astrojs/node`)
-- React 18 (only the form)
-- Tailwind CSS 4
-- `react-turnstile`
-- TypeScript strict
+FastLink turns long, ugly URLs into short, shareable links — in one click, in
+two languages (English / Español), in light or dark theme, and without asking
+anything from you.
 
-## Development
+- 🪄 **One-step shortening.** Paste, pass the captcha, copy.
+- 🔒 **Captcha-protected.** Cloudflare Turnstile keeps bots out so the service
+  stays clean and free.
+- 🚫 **No accounts, no tracking.** No login, no fingerprinting, no profile
+  building. Aggregate counts only.
+- 🌐 **Bilingual.** Every screen and microcopy localized in EN and ES, switch
+  on the fly.
+- 🌗 **Dark / light theme** with system-preference fallback and persistence.
+- ♾️ **Links don't expire.** Once created, a short link works forever.
+
+---
+
+## Why it feels fast
+
+- The landing, FAQ, about and meta are **fully server-rendered HTML**. The
+  browser receives a finished page and starts painting immediately.
+- The shortener form is a **single small interactive island**, hydrated only
+  when needed.
+- Static hashed assets, gzip on the proxy, prefetch on internal nav.
+
+---
+
+## Privacy by default
+
+- **No cookies are written by the app itself.**
+  Only `localStorage` for theme preference (`fastlink_theme`).
+- **No tracking pixels, no analytics SDKs, no third-party fonts.**
+- **Captcha tokens are single-use** and forwarded once to the backend, then
+  discarded.
+- **Backend credentials never reach the browser.** All calls to the
+  shortening API go through a server endpoint that injects HTTP Basic auth at
+  the edge.
+
+```
+Browser ─POST /api/shorten──▶ Server endpoint ──▶ Shortening API
+                              (Basic auth here)
+```
+
+---
+
+## Local development
 
 ```bash
-cp .env.example .env       # then fill in real values
+cp .env.example .env       # fill in real values
 npm install
 npm run dev                # http://localhost:4321
 ```
 
-## Build & run
-
-```bash
-npm run build              # outputs dist/
-node dist/server/entry.mjs # default Node standalone server
-```
-
-Or with PM2 / Docker / systemd as needed.
-
-## Environment
+### Environment
 
 | Variable                    | Side   | Notes                                      |
 | --------------------------- | ------ | ------------------------------------------ |
-| `PUBLIC_SITE_URL`           | public | Used for canonical, OG, sitemap            |
+| `PUBLIC_SITE_URL`           | public | Canonical / OG / sitemap base URL          |
+| `PUBLIC_BASE_PATH`          | public | URL prefix when served on a subpath        |
 | `PUBLIC_TURNSTILE_SITE_KEY` | public | Cloudflare Turnstile site key              |
-| `BACKEND_API_URL`           | server | e.g. `http://localhost:7001/api/PORTFOLIO` |
-| `BACKEND_API_SCHEMA`        | server | `Utilitie`                                 |
-| `BACKEND_API_ENTITY`        | server | `FastLink`                                 |
-| `BACKEND_API_AUTH_BASIC`    | server | `user:password` (never exposed to client)  |
+| `BACKEND_API_URL`           | server | Shortening API base URL                    |
+| `BACKEND_API_SCHEMA`        | server | API schema segment                         |
+| `BACKEND_API_ENTITY`        | server | API entity segment                         |
+| `BACKEND_API_AUTH_BASIC`    | server | `user:password` — never exposed to client  |
 
-## Architecture
+`PUBLIC_*` values are inlined into the client bundle at **build time**;
+everything else is read at runtime from the `.env` file mounted into the
+container.
 
+### Useful scripts
+
+```bash
+npm run dev          # dev server with HMR
+npm run build        # type-check + production build
+npm run preview      # preview the production build
+npm run lint         # eslint
+npm run format       # prettier
+npm run typecheck    # astro check
 ```
-Browser ─POST /api/shorten──▶ Astro server endpoint
-                                │
-                                │ Basic auth (server-only)
-                                ▼
-                         Backend FastLink API
-                         (createLink/{url}/{captcha})
+
+---
+
+## Production build & deploy
+
+```bash
+npm install
+npm run build                 # generates dist/ with PUBLIC_* baked in
+docker build -t fastlink .
+docker run -p 80:80 --env-file .env fastlink
 ```
 
-The browser never sees `BACKEND_API_AUTH_BASIC`. The captcha token is forwarded
-to the backend, which re-verifies it with Cloudflare's siteverify API.
+A ready-to-use `docker-compose.yml` is included with a frontend container and a
+small reverse-proxy container, joined by a private network.
 
-## SEO checklist
+CI (GitHub Actions, `ci-production.yml`) handles format → lint → typecheck →
+build → Docker image push when commits land on the `production` branch.
 
-- [x] Sitemap (`/sitemap-index.xml`) via `@astrojs/sitemap`
-- [x] `robots.txt` allowing crawl, blocking `/api/`
-- [x] `<title>` / `<meta description>` per page
-- [x] Canonical URL per page
-- [x] OpenGraph + Twitter card meta
-- [x] JSON-LD `WebApplication` + `FAQPage` schema
-- [x] Semantic HTML (`<header>`, `<main>`, `<footer>`, `<section>`, `<article>`)
-- [x] Static-rendered hero + FAQ for crawlers
-- [x] Single small React bundle hydrated only on the form
-- [ ] Open Graph image (`/og-default.png` placeholder — add a real one)
+---
 
-## Deployment notes
+## Tech
 
-- Behind Nginx/Caddy: terminate TLS, forward to Node on the chosen port.
-- The standalone server listens on `HOST=0.0.0.0 PORT=4321` by default. Override
-  via env.
-- Set `PUBLIC_SITE_URL` to your real domain at build time so canonical/sitemap
-  emit absolute URLs correctly.
+- TypeScript end to end (`strict`)
+- Server-rendered HTML with a single React island for the form
+- Tailwind CSS for styling, mono-typography branding
+- Cloudflare Turnstile for captcha
+- Containerized for portable deployment behind Nginx / Caddy
+
+---
+
+## License
+
+MIT © [ismaelhv](https://ismaelhv.com)

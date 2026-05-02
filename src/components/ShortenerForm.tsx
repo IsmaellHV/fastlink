@@ -56,7 +56,8 @@ export default function ShortenerForm({ turnstileSiteKey, lang = defaultLang }: 
 
     setSubmitting(true);
     try {
-      const r = await fetch('/api/shorten', {
+      const base = (import.meta.env.BASE_URL || '/').replace(/\/+$/, '');
+      const r = await fetch(`${base}/api/shorten`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ originalLink: url, captcha }),

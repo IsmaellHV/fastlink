@@ -2,7 +2,7 @@
 import SEO from '~/components/SEO.astro';
 import ThemeToggle from '~/components/ThemeToggle.astro';
 import LangSwitcher from '~/components/LangSwitcher.astro';
-import { getLangFromUrl, useTranslations } from '~/i18n/utils';
+import { getLangFromUrl, useTranslations, withBase } from '~/i18n/utils';
 import '~/styles/global.css';
 
 interface Props {
@@ -24,8 +24,8 @@ const t = useTranslations(lang);
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="sitemap" href="/sitemap-index.xml" />
+    <link rel="icon" type="image/svg+xml" href={withBase('/favicon.svg')} />
+    <link rel="sitemap" href={withBase('/sitemap-index.xml')} />
     <SEO {title} {description} {canonical} {ogImage} {noindex} {jsonLd} />
 
     <!-- Theme bootstrap: applied before paint to avoid FOUC -->
@@ -44,11 +44,11 @@ const t = useTranslations(lang);
   <body>
     <header class="border-b" style="border-color: var(--color-border)">
       <nav class="mx-auto flex max-w-5xl items-center justify-between px-4 py-3">
-        <a href={lang === 'en' ? '/' : '/es/'} class="font-bold tracking-tight no-underline" style="color: var(--color-fg)">
+        <a href={lang === 'en' ? withBase('/') : withBase('/es/')} class="font-bold tracking-tight no-underline" style="color: var(--color-fg)">
           fast<span style="color: var(--color-accent)">link</span>
         </a>
         <div class="flex items-center gap-2 text-sm">
-          <a href={lang === 'en' ? '/about' : '/es/about'}>{t('nav.about')}</a>
+          <a href={lang === 'en' ? withBase('/about') : withBase('/es/about')}>{t('nav.about')}</a>
           <a href="https://github.com/IsmaellHV/fastlink" rel="noopener" target="_blank">{t('nav.github')}</a>
           <LangSwitcher />
           <ThemeToggle label={t('nav.toggleTheme')} />

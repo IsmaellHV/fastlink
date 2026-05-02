@@ -1,9 +1,11 @@
 node_modules
-.DS_Store
 dist
+.astro
+.git
+.github
 .env
 .env.local
-.env.prod
 .env.*.local
-.astro
 *.log
+.DS_Store
+README.md

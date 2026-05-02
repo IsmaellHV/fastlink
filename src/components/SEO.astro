@@ -15,6 +15,7 @@ const path = Astro.url.pathname.replace(/\/$/, '') || '/';
 const url = canonical || `${SITE.replace(/\/$/, '')}${path}`;
 const image = ogImage || `${SITE}/og-default.png`;
 ---
+
 <title>{title}</title>
 <meta name="description" content={description} />
 <link rel="canonical" href={url} />
@@ -34,6 +35,4 @@ const image = ogImage || `${SITE}/og-default.png`;
 
 <meta name="theme-color" content="#0a0a0f" />
 
-{jsonLd && (
-  <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
-)}
+{jsonLd && <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}

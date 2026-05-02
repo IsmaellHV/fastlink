@@ -20,5 +20,5 @@ export function useTranslations(lang: Lang) {
 export function localizePath(pathname: string, target: Lang): string {
   const stripped = pathname.replace(/^\/(en|es)(\/|$)/, '/');
   if (target === defaultLang) return stripped;
-  return `/${target}${stripped === '/' ? '' : stripped}` || '/';
+  return `/${target}${stripped === '/' ? '' : stripped}`;
 }

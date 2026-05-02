@@ -35,18 +35,23 @@ export async function createShortLink(originalLink: string, captcha: string): Pr
     return { error: true, message: (err as Error).message || 'Network error', status: 502 };
   }
 
-  let body: any = null;
+  let body: Record<string, unknown> | null = null;
   try {
-    body = await res.json();
+    body = (await res.json()) as Record<string, unknown>;
   } catch {
     /* may be empty */
   }
 
+  const bodyStr = (k: string): string | undefined => {
+    const v = body?.[k];
+    return typeof v === 'string' ? v : undefined;
+  };
+
   if (!res.ok) {
     return {
       error: true,
-      errorDescription: body?.errorDescription,
-      message: body?.errorDescription || body?.message || `Backend ${res.status}`,
+      errorDescription: bodyStr('errorDescription'),
+      message: bodyStr('errorDescription') || bodyStr('message') || `Backend ${res.status}`,
       status: res.status,
     };
   }

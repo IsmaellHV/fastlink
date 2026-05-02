@@ -18,6 +18,7 @@ const { title, description, canonical, ogImage, noindex, jsonLd } = Astro.props;
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 ---
+
 <!doctype html>
 <html lang={lang}>
   <head>

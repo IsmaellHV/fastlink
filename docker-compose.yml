@@ -1,0 +1,42 @@
+services:
+  frontend:
+    image: ismaelhv/fastlink:latest
+    restart: always
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "200k"
+        max-file: "10"
+    env_file:
+      - .env
+    networks:
+      - net
+    deploy:
+      mode: replicated
+      replicas: 1
+      endpoint_mode: dnsrr
+      placement:
+        max_replicas_per_node: 1
+
+  proxy:
+    image: ismaelhv/proxy-web:latest
+    restart: always
+    ports:
+      - 2005:80
+    networks:
+      - net
+    depends_on:
+      - frontend
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: 100M
+
+networks:
+  net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.5.0/24
+          gateway: 172.20.5.1

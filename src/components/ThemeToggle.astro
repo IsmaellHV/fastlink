@@ -1,7 +1,10 @@
 ---
-interface Props { label: string }
+interface Props {
+  label: string;
+}
 const { label } = Astro.props;
 ---
+
 <button
   id="theme-toggle"
   type="button"
@@ -29,7 +32,11 @@ const { label } = Astro.props;
     btn.addEventListener('click', () => {
       const next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
       document.documentElement.dataset.theme = next;
-      try { localStorage.setItem('fastlink_theme', next); } catch {}
+      try {
+        localStorage.setItem('fastlink_theme', next);
+      } catch {
+        /* localStorage unavailable (private mode / quota) — ignore */
+      }
       sync();
     });
   })();

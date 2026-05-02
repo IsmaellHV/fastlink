@@ -37,14 +37,14 @@ Or with PM2 / Docker / systemd as needed.
 
 ## Environment
 
-| Variable                       | Side    | Notes                                         |
-| ------------------------------ | ------- | --------------------------------------------- |
-| `PUBLIC_SITE_URL`              | public  | Used for canonical, OG, sitemap               |
-| `PUBLIC_TURNSTILE_SITE_KEY`    | public  | Cloudflare Turnstile site key                 |
-| `BACKEND_API_URL`              | server  | e.g. `http://localhost:7001/api/PORTFOLIO`    |
-| `BACKEND_API_SCHEMA`           | server  | `Utilitie`                                    |
-| `BACKEND_API_ENTITY`           | server  | `FastLink`                                    |
-| `BACKEND_API_AUTH_BASIC`       | server  | `user:password` (never exposed to client)     |
+| Variable                    | Side   | Notes                                      |
+| --------------------------- | ------ | ------------------------------------------ |
+| `PUBLIC_SITE_URL`           | public | Used for canonical, OG, sitemap            |
+| `PUBLIC_TURNSTILE_SITE_KEY` | public | Cloudflare Turnstile site key              |
+| `BACKEND_API_URL`           | server | e.g. `http://localhost:7001/api/PORTFOLIO` |
+| `BACKEND_API_SCHEMA`        | server | `Utilitie`                                 |
+| `BACKEND_API_ENTITY`        | server | `FastLink`                                 |
+| `BACKEND_API_AUTH_BASIC`    | server | `user:password` (never exposed to client)  |
 
 ## Architecture
 

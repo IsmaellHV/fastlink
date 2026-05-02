@@ -7,6 +7,7 @@ const other: Lang = current === 'en' ? 'es' : 'en';
 const href = localizePath(Astro.url.pathname, other);
 const label = languages[other];
 ---
+
 <a
   href={href}
   hreflang={other}

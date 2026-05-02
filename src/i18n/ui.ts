@@ -15,13 +15,11 @@ export const ui = {
     'nav.toggleLang': 'Switch language',
 
     'home.metaTitle': 'FastLink — Free, fast, privacy-friendly URL shortener',
-    'home.metaDescription':
-      'Shorten any long URL into a short link in seconds. No tracking by default, captcha-protected, free forever.',
+    'home.metaDescription': 'Shorten any long URL into a short link in seconds. No tracking by default, captcha-protected, free forever.',
     'home.heroPre': 'Shorten URLs',
     'home.heroAccent': 'fast',
     'home.heroDot': '.',
-    'home.heroLead':
-      'Free URL shortener with captcha protection. Paste a long link, get a short one. That’s it.',
+    'home.heroLead': 'Free URL shortener with captcha protection. Paste a long link, get a short one. That’s it.',
 
     'home.whyTitle': 'Why FastLink',
     'home.whyFastTitle': 'Fast',
@@ -44,8 +42,7 @@ export const ui = {
     'about.title': 'About FastLink',
     'about.body1':
       'FastLink is a small, fast and privacy-friendly URL shortener. Paste a long link, get a short one — no account, no tracking pixels, no clutter.',
-    'about.body2':
-      'Every request is captcha-protected to keep bots and spam out, so the service stays clean and free for everyone.',
+    'about.body2': 'Every request is captcha-protected to keep bots and spam out, so the service stays clean and free for everyone.',
     'about.madeBy': 'Made by',
 
     'footer.tagline': 'FastLink · Free URL shortener',
@@ -58,8 +55,7 @@ export const ui = {
     'form.errCaptcha': 'Please complete the captcha',
     'form.errClipboard': 'Could not copy to clipboard',
     'form.errGeneric': 'Request failed',
-    'form.policy':
-      'By shortening a URL you agree to our basic acceptable-use policy. Don’t shorten malware, phishing or illegal content.',
+    'form.policy': 'By shortening a URL you agree to our basic acceptable-use policy. Don’t shorten malware, phishing or illegal content.',
     'form.readyTitle': 'Your link is ready!',
     'form.readyLead': 'Share it anywhere. Links never expire.',
     'form.copy': 'Copy',
@@ -75,13 +71,11 @@ export const ui = {
     'nav.toggleLang': 'Cambiar idioma',
 
     'home.metaTitle': 'FastLink — Acortador de URLs gratis, rápido y privado',
-    'home.metaDescription':
-      'Acorta cualquier URL larga en segundos. Sin rastreo, protegido por captcha, gratis para siempre.',
+    'home.metaDescription': 'Acorta cualquier URL larga en segundos. Sin rastreo, protegido por captcha, gratis para siempre.',
     'home.heroPre': 'Acorta URLs',
     'home.heroAccent': 'rápido',
     'home.heroDot': '.',
-    'home.heroLead':
-      'Acortador de URLs gratis con protección captcha. Pega un enlace largo, obtén uno corto. Así de simple.',
+    'home.heroLead': 'Acortador de URLs gratis con protección captcha. Pega un enlace largo, obtén uno corto. Así de simple.',
 
     'home.whyTitle': 'Por qué FastLink',
     'home.whyFastTitle': 'Rápido',
@@ -118,8 +112,7 @@ export const ui = {
     'form.errCaptcha': 'Completa el captcha',
     'form.errClipboard': 'No se pudo copiar al portapapeles',
     'form.errGeneric': 'La petición falló',
-    'form.policy':
-      'Al acortar una URL aceptas la política básica de uso aceptable. No acortes malware, phishing ni contenido ilegal.',
+    'form.policy': 'Al acortar una URL aceptas la política básica de uso aceptable. No acortes malware, phishing ni contenido ilegal.',
     'form.readyTitle': '¡Tu enlace está listo!',
     'form.readyLead': 'Compártelo donde quieras. Los enlaces nunca caducan.',
     'form.copy': 'Copiar',

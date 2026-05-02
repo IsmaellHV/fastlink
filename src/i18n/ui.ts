@@ -48,9 +48,15 @@ export const ui = {
     'about.body1':
       'FastLink is a small, fast and privacy-friendly URL shortener. Paste a long link, get a short one — no account, no tracking pixels, no clutter.',
     'about.body2': 'Every request is captcha-protected to keep bots and spam out, so the service stays clean and free for everyone.',
+    'about.authorTitle': 'About the author',
+    'about.authorBody':
+      'Built and maintained by Ismael Hurtado Vargas, a Full-Stack developer based in Lima, Peru. Focused on web, mobile and AI automation since 2014.',
+    'about.viewSource': 'View source on GitHub',
+    'about.visitPortfolio': 'Visit portfolio',
     'about.madeBy': 'Made by',
 
     'footer.tagline': 'FastLink · Free URL shortener',
+    'footer.byAuthor': 'by',
 
     'form.label': 'Paste your long URL',
     'form.placeholder': 'https://example.com/very/long/path?query=value',
@@ -109,9 +115,15 @@ export const ui = {
       'FastLink es un acortador de URLs pequeño, rápido y privado. Pega un enlace largo y obtén uno corto — sin cuenta, sin píxeles de rastreo, sin desorden.',
     'about.body2':
       'Cada petición está protegida por captcha para mantener fuera bots y spam, así el servicio sigue limpio y gratis para todos.',
+    'about.authorTitle': 'Sobre el autor',
+    'about.authorBody':
+      'Construido y mantenido por Ismael Hurtado Vargas, desarrollador Full-Stack en Lima, Perú. Enfocado en web, mobile y automatización con IA desde 2014.',
+    'about.viewSource': 'Ver código en GitHub',
+    'about.visitPortfolio': 'Ver portfolio',
     'about.madeBy': 'Hecho por',
 
     'footer.tagline': 'FastLink · Acortador de URLs gratis',
+    'footer.byAuthor': 'por',
 
     'form.label': 'Pega tu URL larga',
     'form.placeholder': 'https://ejemplo.com/ruta/muy/larga?param=valor',

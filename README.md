@@ -1,9 +1,18 @@
-# FastLink
+<p align="center">
+  <img src="public/favicon.svg" alt="FastLink logo" width="96" height="96" />
+</p>
 
-> Free, fast, privacy-friendly URL shortener.
-> Paste a long link, get a short one. No account. No tracking pixels. No clutter.
+<h1 align="center">FastLink</h1>
 
-🔗 **Live:** [ismaelhv.com/fastlink](https://ismaelhv.com/fastlink/)
+<p align="center">
+  Free, fast, privacy-friendly URL shortener.<br/>
+  Paste a long link, get a short one. No account. No tracking pixels. No clutter.
+</p>
+
+<p align="center">
+  🔗 <a href="https://ismaelhv.com/fastlink/">ismaelhv.com/fastlink</a> ·
+  ✨ by <a href="https://ismaelhv.com">Ismael Hurtado</a>
+</p>
 
 ---
 

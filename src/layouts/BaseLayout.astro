@@ -45,8 +45,22 @@ const t = useTranslations(lang);
   <body>
     <header class="border-b" style="border-color: var(--color-border)">
       <nav class="mx-auto flex max-w-5xl items-center justify-between px-4 py-3">
-        <a href={lang === 'en' ? withBase('/') : withBase('/es/')} class="font-bold tracking-tight no-underline" style="color: var(--color-fg)">
-          fast<span style="color: var(--color-accent)">link</span>
+        <a
+          href={lang === 'en' ? withBase('/') : withBase('/es/')}
+          class="inline-flex items-center gap-2 font-bold tracking-tight no-underline"
+          style="color: var(--color-fg)"
+          aria-label="FastLink home"
+        >
+          <svg width="22" height="22" viewBox="0 0 64 64" aria-hidden="true">
+            <defs>
+              <linearGradient id="fl-nav-bolt" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#00d9ff"/>
+                <stop offset="1" stop-color="#7c5cff"/>
+              </linearGradient>
+            </defs>
+            <path d="M34 8 L18 36 H29 L26 56 L46 26 H35 Z" fill="url(#fl-nav-bolt)" stroke="#00d9ff" stroke-width="1.5" stroke-linejoin="round"/>
+          </svg>
+          <span>fast<span style="color: var(--color-accent)">link</span></span>
         </a>
         <div class="flex items-center gap-2 text-sm">
           <a href={lang === 'en' ? withBase('/about') : withBase('/es/about')}>{t('nav.about')}</a>
@@ -62,7 +76,10 @@ const t = useTranslations(lang);
     </main>
 
     <footer class="mt-24 border-t py-6 text-center text-xs" style="border-color: var(--color-border); color: var(--color-fg-muted)">
-      <p>{t('footer.tagline')} · &copy; {new Date().getFullYear()} ismaelhv</p>
+      <p>
+        {t('footer.tagline')} · &copy; {new Date().getFullYear()} {t('footer.byAuthor')}
+        <a href="https://ismaelhv.com" rel="noopener" target="_blank" style="color: var(--color-accent)">Ismael Hurtado</a>
+      </p>
     </footer>
   </body>
 </html>

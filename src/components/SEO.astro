@@ -1,0 +1,39 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  canonical?: string;
+  ogImage?: string;
+  noindex?: boolean;
+  jsonLd?: Record<string, unknown> | Record<string, unknown>[];
+}
+
+const SITE = import.meta.env.PUBLIC_SITE_URL || Astro.site?.toString() || 'https://fastlink.ismaelhv.com';
+const { title, description, canonical, ogImage, noindex, jsonLd } = Astro.props;
+
+const path = Astro.url.pathname.replace(/\/$/, '') || '/';
+const url = canonical || `${SITE.replace(/\/$/, '')}${path}`;
+const image = ogImage || `${SITE}/og-default.png`;
+---
+<title>{title}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={url} />
+{noindex && <meta name="robots" content="noindex,nofollow" />}
+
+<meta property="og:type" content="website" />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={url} />
+<meta property="og:image" content={image} />
+<meta property="og:site_name" content="FastLink" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={image} />
+
+<meta name="theme-color" content="#0a0a0f" />
+
+{jsonLd && (
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+)}

@@ -1,0 +1,66 @@
+---
+import SEO from '~/components/SEO.astro';
+import ThemeToggle from '~/components/ThemeToggle.astro';
+import LangSwitcher from '~/components/LangSwitcher.astro';
+import { getLangFromUrl, useTranslations } from '~/i18n/utils';
+import '~/styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+  canonical?: string;
+  ogImage?: string;
+  noindex?: boolean;
+  jsonLd?: Record<string, unknown> | Record<string, unknown>[];
+}
+
+const { title, description, canonical, ogImage, noindex, jsonLd } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <SEO {title} {description} {canonical} {ogImage} {noindex} {jsonLd} />
+
+    <!-- Theme bootstrap: applied before paint to avoid FOUC -->
+    <script is:inline>
+      (() => {
+        try {
+          const stored = localStorage.getItem('fastlink_theme');
+          const prefers = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+          document.documentElement.dataset.theme = stored || prefers;
+        } catch {
+          document.documentElement.dataset.theme = 'dark';
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <header class="border-b" style="border-color: var(--color-border)">
+      <nav class="mx-auto flex max-w-5xl items-center justify-between px-4 py-3">
+        <a href={lang === 'en' ? '/' : '/es/'} class="font-bold tracking-tight no-underline" style="color: var(--color-fg)">
+          fast<span style="color: var(--color-accent)">link</span>
+        </a>
+        <div class="flex items-center gap-2 text-sm">
+          <a href={lang === 'en' ? '/about' : '/es/about'}>{t('nav.about')}</a>
+          <a href="https://github.com/IsmaellHV/fastlink" rel="noopener" target="_blank">{t('nav.github')}</a>
+          <LangSwitcher />
+          <ThemeToggle label={t('nav.toggleTheme')} />
+        </div>
+      </nav>
+    </header>
+
+    <main class="mx-auto max-w-5xl px-4 py-10">
+      <slot />
+    </main>
+
+    <footer class="mt-24 border-t py-6 text-center text-xs" style="border-color: var(--color-border); color: var(--color-fg-muted)">
+      <p>{t('footer.tagline')} · &copy; {new Date().getFullYear()} ismaelhv</p>
+    </footer>
+  </body>
+</html>

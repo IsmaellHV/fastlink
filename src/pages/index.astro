@@ -1,0 +1,86 @@
+---
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import ShortenerForm from '~/components/ShortenerForm.tsx';
+import { getLangFromUrl, useTranslations } from '~/i18n/utils';
+
+const SITE = import.meta.env.PUBLIC_SITE_URL || Astro.site?.toString() || 'https://fastlink.ismaelhv.com';
+const TURNSTILE_SITE_KEY = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || '';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const title = t('home.metaTitle');
+const description = t('home.metaDescription');
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebApplication',
+    name: 'FastLink',
+    url: SITE,
+    applicationCategory: 'UtilitiesApplication',
+    operatingSystem: 'Any',
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+    description,
+    inLanguage: lang,
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    inLanguage: lang,
+    mainEntity: [
+      { '@type': 'Question', name: t('home.faqQ1'), acceptedAnswer: { '@type': 'Answer', text: t('home.faqA1') } },
+      { '@type': 'Question', name: t('home.faqQ2'), acceptedAnswer: { '@type': 'Answer', text: t('home.faqA2') } },
+      { '@type': 'Question', name: t('home.faqQ3'), acceptedAnswer: { '@type': 'Answer', text: t('home.faqA3') } },
+    ],
+  },
+];
+---
+<BaseLayout {title} {description} {jsonLd}>
+  <section class="mb-10 text-center">
+    <h1 class="mb-3 text-4xl font-bold tracking-tight md:text-5xl">
+      {t('home.heroPre')} <span style="color: var(--color-accent)">{t('home.heroAccent')}</span>{t('home.heroDot')}
+    </h1>
+    <p class="mx-auto max-w-2xl text-base md:text-lg" style="color: var(--color-fg-muted)">
+      {t('home.heroLead')}
+    </p>
+  </section>
+
+  <section aria-label="URL shortener" class="mx-auto max-w-2xl">
+    <ShortenerForm client:only="react" turnstileSiteKey={TURNSTILE_SITE_KEY} lang={lang} />
+  </section>
+
+  <section class="mx-auto mt-20 max-w-3xl">
+    <h2 class="mb-6 text-2xl font-bold">{t('home.whyTitle')}</h2>
+    <div class="grid gap-6 md:grid-cols-3">
+      <div>
+        <h3 class="mb-2 font-semibold" style="color: var(--color-accent)">{t('home.whyFastTitle')}</h3>
+        <p class="text-sm" style="color: var(--color-fg-muted)">{t('home.whyFastBody')}</p>
+      </div>
+      <div>
+        <h3 class="mb-2 font-semibold" style="color: var(--color-accent)">{t('home.whyPrivateTitle')}</h3>
+        <p class="text-sm" style="color: var(--color-fg-muted)">{t('home.whyPrivateBody')}</p>
+      </div>
+      <div>
+        <h3 class="mb-2 font-semibold" style="color: var(--color-accent)">{t('home.whyFreeTitle')}</h3>
+        <p class="text-sm" style="color: var(--color-fg-muted)">{t('home.whyFreeBody')}</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="mx-auto mt-20 max-w-3xl">
+    <h2 class="mb-6 text-2xl font-bold">{t('home.faqTitle')}</h2>
+    <details class="mb-3 rounded-md border p-4" style="border-color: var(--color-border)">
+      <summary class="cursor-pointer font-semibold">{t('home.faqQ1')}</summary>
+      <p class="mt-2 text-sm" style="color: var(--color-fg-muted)">{t('home.faqA1')}</p>
+    </details>
+    <details class="mb-3 rounded-md border p-4" style="border-color: var(--color-border)">
+      <summary class="cursor-pointer font-semibold">{t('home.faqQ2')}</summary>
+      <p class="mt-2 text-sm" style="color: var(--color-fg-muted)">{t('home.faqA2')}</p>
+    </details>
+    <details class="rounded-md border p-4" style="border-color: var(--color-border)">
+      <summary class="cursor-pointer font-semibold">{t('home.faqQ3')}</summary>
+      <p class="mt-2 text-sm" style="color: var(--color-fg-muted)">{t('home.faqA3')}</p>
+    </details>
+  </section>
+</BaseLayout>

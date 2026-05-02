@@ -1,0 +1,64 @@
+@import 'tailwindcss';
+
+@theme {
+  --font-mono: ui-monospace, 'Fira Code', SFMono-Regular, Menlo, monospace;
+}
+
+/* Default (dark) theme tokens */
+:root,
+:root[data-theme='dark'] {
+  --color-bg: #0a0a0f;
+  --color-bg-card: #14141d;
+  --color-fg: #e6e6f0;
+  --color-fg-muted: #8a8a99;
+  --color-border: #2a2a36;
+  --color-accent: #00d9ff;
+  --color-accent-2: #ff2d95;
+}
+
+:root[data-theme='light'] {
+  --color-bg: #fafafa;
+  --color-bg-card: #ffffff;
+  --color-fg: #14141d;
+  --color-fg-muted: #5a5a66;
+  --color-border: #e2e2ea;
+  --color-accent: #0073e6;
+  --color-accent-2: #d4267a;
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: var(--color-bg);
+  color-scheme: dark;
+}
+html[data-theme='light'] {
+  color-scheme: light;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-fg);
+  font-family: var(--font-mono);
+  min-height: 100vh;
+  margin: 0;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+a {
+  color: var(--color-accent);
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}

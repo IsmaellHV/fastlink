@@ -1,0 +1,17 @@
+---
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import { getLangFromUrl, useTranslations } from '~/i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+<BaseLayout title={t('about.metaTitle')} description={t('about.metaDescription')}>
+  <article class="prose prose-invert mx-auto max-w-2xl">
+    <h1 class="mb-4 text-3xl font-bold">{t('about.title')}</h1>
+    <p class="mb-4" style="color: var(--color-fg-muted)">{t('about.body1')}</p>
+    <p class="mb-4" style="color: var(--color-fg-muted)">{t('about.body2')}</p>
+    <p style="color: var(--color-fg-muted)">
+      {t('about.madeBy')} <a href="https://ismaelhv.com" rel="noopener">ismaelhv</a>.
+    </p>
+  </article>
+</BaseLayout>

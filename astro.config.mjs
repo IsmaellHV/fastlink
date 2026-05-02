@@ -5,10 +5,9 @@ import sitemap from '@astrojs/sitemap';
 import node from '@astrojs/node';
 import tailwindcss from '@tailwindcss/vite';
 
-const SITE = process.env.PUBLIC_SITE_URL || 'https://ismaelhv.com';
-const BASE = process.env.PUBLIC_BASE_PATH || '/fastlink';
+const SITE = process.env.PUBLIC_SITE_URL;
+const BASE = process.env.PUBLIC_BASE_PATH;
 
-// https://astro.build/config
 export default defineConfig({
   site: SITE,
   base: BASE,

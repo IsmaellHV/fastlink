@@ -12,9 +12,10 @@ interface Props {
   ogImage?: string;
   noindex?: boolean;
   jsonLd?: Record<string, unknown> | Record<string, unknown>[];
+  keywords?: string;
 }
 
-const { title, description, canonical, ogImage, noindex, jsonLd } = Astro.props;
+const { title, description, canonical, ogImage, noindex, jsonLd, keywords } = Astro.props;
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 ---
@@ -26,7 +27,7 @@ const t = useTranslations(lang);
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <link rel="icon" type="image/svg+xml" href={withBase('/favicon.svg')} />
     <link rel="sitemap" href={withBase('/sitemap-index.xml')} />
-    <SEO {title} {description} {canonical} {ogImage} {noindex} {jsonLd} />
+    <SEO {title} {description} {canonical} {ogImage} {noindex} {jsonLd} {keywords} />
 
     <!-- Theme bootstrap: applied before paint to avoid FOUC -->
     <script is:inline>

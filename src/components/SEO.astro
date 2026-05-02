@@ -1,4 +1,6 @@
 ---
+import { localizePath } from '~/i18n/utils';
+
 interface Props {
   title: string;
   description: string;
@@ -6,20 +8,32 @@ interface Props {
   ogImage?: string;
   noindex?: boolean;
   jsonLd?: Record<string, unknown> | Record<string, unknown>[];
+  keywords?: string;
 }
 
-const SITE = import.meta.env.PUBLIC_SITE_URL || Astro.site?.toString() || 'https://fastlink.ismaelhv.com';
-const { title, description, canonical, ogImage, noindex, jsonLd } = Astro.props;
+const SITE = import.meta.env.PUBLIC_SITE_URL || Astro.site?.toString() || 'https://ismaelhv.com';
+const { title, description, canonical, ogImage, noindex, jsonLd, keywords } = Astro.props;
 
+const siteRoot = SITE.replace(/\/$/, '');
 const path = Astro.url.pathname.replace(/\/$/, '') || '/';
-const url = canonical || `${SITE.replace(/\/$/, '')}${path}`;
-const image = ogImage || `${SITE}/og-default.png`;
+const url = canonical || `${siteRoot}${path}`;
+const image = ogImage || `${siteRoot}/og-default.png`;
+
+const enHref = `${siteRoot}${localizePath(Astro.url.pathname, 'en')}`;
+const esHref = `${siteRoot}${localizePath(Astro.url.pathname, 'es')}`;
 ---
 
 <title>{title}</title>
 <meta name="description" content={description} />
+{keywords && <meta name="keywords" content={keywords} />}
 <link rel="canonical" href={url} />
+
+<link rel="alternate" hreflang="en" href={enHref} />
+<link rel="alternate" hreflang="es" href={esHref} />
+<link rel="alternate" hreflang="x-default" href={enHref} />
+
 {noindex && <meta name="robots" content="noindex,nofollow" />}
+{!noindex && <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1" />}
 
 <meta property="og:type" content="website" />
 <meta property="og:title" content={title} />
@@ -27,12 +41,14 @@ const image = ogImage || `${SITE}/og-default.png`;
 <meta property="og:url" content={url} />
 <meta property="og:image" content={image} />
 <meta property="og:site_name" content="FastLink" />
+<meta property="og:locale" content={Astro.url.pathname.includes('/es/') ? 'es_ES' : 'en_US'} />
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content={title} />
 <meta name="twitter:description" content={description} />
 <meta name="twitter:image" content={image} />
 
-<meta name="theme-color" content="#0a0a0f" />
+<meta name="theme-color" content="#00d9ff" />
+<meta name="author" content="ismaelhv" />
 
 {jsonLd && <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}

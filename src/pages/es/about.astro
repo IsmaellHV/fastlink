@@ -4,9 +4,22 @@ import { getLangFromUrl, useTranslations } from '~/i18n/utils';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
+
+const SITE = (import.meta.env.PUBLIC_SITE_URL || Astro.site?.toString() || 'https://ismaelhv.com').replace(/\/$/, '');
+const url = `${SITE}${Astro.url.pathname.replace(/\/$/, '')}`;
+const homePath = lang === 'en' ? '/fastlink/' : '/fastlink/es/';
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'FastLink', item: `${SITE}${homePath}` },
+    { '@type': 'ListItem', position: 2, name: t('about.title'), item: url },
+  ],
+};
 ---
 
-<BaseLayout title={t('about.metaTitle')} description={t('about.metaDescription')}>
+<BaseLayout title={t('about.metaTitle')} description={t('about.metaDescription')} keywords={t('about.metaKeywords')} {jsonLd}>
   <article class="prose prose-invert mx-auto max-w-2xl">
     <h1 class="mb-4 text-3xl font-bold">{t('about.title')}</h1>
     <p class="mb-4" style="color: var(--color-fg-muted)">{t('about.body1')}</p>

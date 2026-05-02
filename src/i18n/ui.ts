@@ -14,8 +14,11 @@ export const ui = {
     'nav.toggleTheme': 'Toggle theme',
     'nav.toggleLang': 'Switch language',
 
-    'home.metaTitle': 'FastLink — Free, fast, privacy-friendly URL shortener',
-    'home.metaDescription': 'Shorten any long URL into a short link in seconds. No tracking by default, captcha-protected, free forever.',
+    'home.metaTitle': 'FastLink — Free URL Shortener · No Tracking, No Sign-up',
+    'home.metaDescription':
+      'Free URL shortener. Paste a long URL, get a short link in seconds. No account, no tracking pixels, captcha-protected. Links never expire.',
+    'home.metaKeywords':
+      'url shortener, free url shortener, link shortener, short url, custom short link, no tracking shortener, free link shortener online',
     'home.heroPre': 'Shorten URLs',
     'home.heroAccent': 'fast',
     'home.heroDot': '.',
@@ -37,8 +40,10 @@ export const ui = {
     'home.faqQ3': 'Do you track who clicks my links?',
     'home.faqA3': 'We collect minimal aggregate metrics. No personal profile is built.',
 
-    'about.metaTitle': 'About FastLink — fast, free URL shortener',
-    'about.metaDescription': 'FastLink is a free, privacy-friendly URL shortener.',
+    'about.metaTitle': 'About FastLink — Free, Privacy-Friendly URL Shortener',
+    'about.metaDescription':
+      'About FastLink: a free, fast, privacy-friendly URL shortener. No accounts, no tracking pixels, captcha-protected, links never expire.',
+    'about.metaKeywords': 'about fastlink, url shortener privacy, free link shortener, no tracking url shortener',
     'about.title': 'About FastLink',
     'about.body1':
       'FastLink is a small, fast and privacy-friendly URL shortener. Paste a long link, get a short one — no account, no tracking pixels, no clutter.',
@@ -70,8 +75,11 @@ export const ui = {
     'nav.toggleTheme': 'Cambiar tema',
     'nav.toggleLang': 'Cambiar idioma',
 
-    'home.metaTitle': 'FastLink — Acortador de URLs gratis, rápido y privado',
-    'home.metaDescription': 'Acorta cualquier URL larga en segundos. Sin rastreo, protegido por captcha, gratis para siempre.',
+    'home.metaTitle': 'FastLink — Acortador de URLs Gratis · Sin Registro ni Rastreo',
+    'home.metaDescription':
+      'Acortador de URLs gratis. Pega una URL larga y obtén un enlace corto en segundos. Sin cuenta, sin píxeles de rastreo, protegido por captcha. No caducan.',
+    'home.metaKeywords':
+      'acortador de urls, acortador de enlaces gratis, link shortener, url corta, enlace corto, acortar url, sin rastreo, gratis sin registro',
     'home.heroPre': 'Acorta URLs',
     'home.heroAccent': 'rápido',
     'home.heroDot': '.',
@@ -93,7 +101,8 @@ export const ui = {
     'home.faqQ3': '¿Rastrean quién hace clic en mis enlaces?',
     'home.faqA3': 'Recopilamos métricas agregadas mínimas. No construimos perfiles personales.',
 
-    'about.metaTitle': 'Acerca de FastLink — acortador de URLs gratis y rápido',
+    'about.metaTitle': 'Acerca de FastLink — Acortador de URLs Gratis y Privado',
+    'about.metaKeywords': 'acerca fastlink, acortador urls privacidad, acortador enlaces gratis, sin rastreo',
     'about.metaDescription': 'FastLink es un acortador de URLs gratis y respetuoso con la privacidad.',
     'about.title': 'Acerca de FastLink',
     'about.body1':

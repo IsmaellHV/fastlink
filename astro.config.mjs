@@ -1,12 +1,15 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
+import { loadEnv } from 'vite';
 import react from '@astrojs/react';
 import sitemap from '@astrojs/sitemap';
 import node from '@astrojs/node';
 import tailwindcss from '@tailwindcss/vite';
 
-const SITE = process.env.PUBLIC_SITE_URL;
-const BASE = process.env.PUBLIC_BASE_PATH;
+const env = loadEnv(process.env.NODE_ENV ?? 'development', process.cwd(), '');
+
+const SITE = env.PUBLIC_SITE_URL;
+const BASE = env.PUBLIC_BASE_PATH;
 
 export default defineConfig({
   site: SITE,

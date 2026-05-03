@@ -10,5 +10,9 @@
     </linearGradient>
   </defs>
   <rect width="64" height="64" rx="14" fill="url(#fl-bg)"/>
-  <path d="M34 8 L18 36 H29 L26 56 L46 26 H35 Z" fill="url(#fl-bolt)" stroke="#00d9ff" stroke-width="1.5" stroke-linejoin="round"/>
+  <!-- Lightning bolt: bold, centered, simple Z shape -->
+  <path
+    d="M38 6 L14 36 H28 L24 58 L50 28 H36 L42 6 Z"
+    fill="url(#fl-bolt)"
+  />
 </svg>

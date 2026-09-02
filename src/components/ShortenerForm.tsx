@@ -62,7 +62,16 @@ export default function ShortenerForm({ turnstileSiteKey, lang = defaultLang }: 
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ originalLink: url, captcha }),
       });
-      const data = (await r.json()) as ApiResp;
+      // No se asume JSON: si algo entre el navegador y la app (proxy, CDN)
+      // responde con su propia pagina de error, aqui llega HTML y un r.json()
+      // a secas reventaba con "Unexpected token '<'", que no dice nada al usuario.
+      const raw = await r.text();
+      let data: ApiResp | null = null;
+      try {
+        data = JSON.parse(raw) as ApiResp;
+      } catch {
+        throw new Error(`${tr['form.errGeneric']} (${r.status})`);
+      }
       if (!r.ok || 'error' in data) {
         throw new Error(('error' in data && data.message) || `${tr['form.errGeneric']} (${r.status})`);
       }
